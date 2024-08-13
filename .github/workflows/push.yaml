@@ -8,12 +8,11 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Run Unit Tests
-        run: |
-            GOOS=linux GOARCH=amd64 go test -v ./...
+        run: GOOS=linux GOARCH=amd64 go test
 
-      - name: Run vet
+      - name: Vet
         run: |
-          go vet
+          go vet ./...
 
   deploy:
     name: Push Docker image to Docker Hub
@@ -37,7 +36,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5.5.1
         with:
-          images: nicksanm/final-main
+          images: nicksanm/final-name
 
       - name: Build and push Docker Inage
         uses: docker/build-push-action@v5
